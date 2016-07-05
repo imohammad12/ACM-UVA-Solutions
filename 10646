@@ -1,0 +1,49 @@
+
+
+#include <iostream>
+
+#include <vector>
+#include <set>
+#include <string>
+#include<math.h>
+#include <iterator>
+using namespace std;
+int main(){
+	int i,j,N,x,y=0,del;
+	vector<string> vec1;
+	cin >> N;
+	for(j=0;j<N;j++){
+		for( i=0;i<52;i++){
+			string st;
+			cin >> st;
+			vec1.push_back(st);
+		}
+	}
+	for(j=0;j<N;j++){
+		int alldel=0;
+		vector<string>::iterator it26 = vec1.begin()+51;
+		it26 = it26-25;
+		vector<string>::iterator it28 ;
+		for(i=0;i<3;i++){
+			if ( 2<(*it26)[0]-'0' && (*it26)[0]-'0'<9)
+				x = (*it26)[0]-'0';
+			else
+				x = 10;
+			y+=x;
+			del=10-x;
+			alldel+=del;
+			it28 = it26-(del+1);
+			vec1.erase(it26-del,it26+1);
+			it26 = it28;
+		}
+		alldel += 3;
+		alldel = (52-alldel);
+		vector<string>::iterator it27 = vec1.begin();
+		advance(it27,y-1);
+		cout<<"Case "<<j+1<<": "<<*it27<<endl ;
+		vec1.erase(vec1.begin(),vec1.begin()+alldel);
+		y=0;
+	}
+}
+
+//JC 3C 9H KC TH 2D AC 6D 2S TC 2H 6H 8C 5D 3S JH AS JS 4C 9S 9D 6S 8H 2C 8D 8S JD 5H QD 7D KH KD AD KS 3H 5S TD 6C 7C TS 9C 7H 4S QS QC AH 3D 5C 7S 4D QH 4H ---> AD
