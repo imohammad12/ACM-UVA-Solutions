@@ -1,0 +1,98 @@
+#include <iostream>
+
+using namespace std;
+
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+
+
+
+class UnionFind {
+private:
+public:
+    vector<int> p, rank;
+    UnionFind(int N) {
+        rank.assign(N, 0);
+        p.assign(N, 0);
+        for (int i = 0; i < N; i++)
+            p[i] = i;
+    }
+
+    int findSet(int i) {
+        return (p[i] == i) ? i : (p[i] = findSet(p[i]));
+    }
+
+    bool isSameSet(int i, int j) {
+        return findSet(i) == findSet(j);
+    }
+
+    void unionSet(int i, int j) {
+        if (!isSameSet(i, j)) {
+            int x = findSet(i), y = findSet(j);
+            if (rank[x] > rank[y])
+                p[y] = x;
+            else {
+                p[x] = y;
+                if (rank[x] == rank[y])
+                    rank[y]++;
+            }
+        }
+    }
+
+    int findNomberOfTrees(void){
+        int n = 0;
+        for (int i = 0; i < p.size(); i++){
+            if (p[i] == i){
+                for (int j = 0; j < p.size(); j++){
+                    if(i != j && p[j] == i) {
+                        ++n;
+                        break;
+                    }
+                }
+            }
+
+        }
+        return n;
+    }
+};
+
+int main() {
+    int n;
+    cin>>n;
+    for(int i = 0 ; i < n ; i++){
+        vector<pair<char,char>> v;
+        char c,d;
+        if(i == 0 ) cin.ignore();
+        while((c = getchar()) != '*'){
+            cin>>c;
+            cin.ignore();
+            cin>>d;
+            cin.ignore();
+            cin.ignore();
+            v.push_back(make_pair(c,d));
+        }
+        while((c = getchar()) == '*'){}
+        int counter = 0;
+        map<char,int> map1;
+        while((c = getchar()) != '\n'){
+            if(c == ',')
+                continue;
+            map1[c] = counter;
+            counter++;
+        }
+        int number = counter - v.size();
+        UnionFind uf(counter);
+        for(int i = 0 ; i < v.size() ; i++){
+            uf.unionSet(map1[v[i].first],map1[v[i].second]);
+          
+        }
+        cout <<"There are "<<uf.findNomberOfTrees()<<" tree(s) and "<< number - (uf.findNomberOfTrees())<<" acorn(s)."<<endl;
+
+
+
+
+    }
+    return 0;
+}
