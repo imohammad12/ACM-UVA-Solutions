@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+
+int main(void) {
+
+    int fuck;
+    while (cin >> fuck) {
+        vector<vector<pair<int, int>>> matrix;
+
+        int cloum, row;
+        row = fuck;
+        cin >> cloum;
+        matrix.resize(cloum);
+        for (int i = 0; i < row; i++) {
+            int cnum = 0, n[1002], content[1002];
+            cin >> cnum;
+            if (cnum == 0)
+                continue;
+            for (int j = 0; j < cnum; j++) {
+                cin >> n[j];
+            }
+            for (int j = 0; j < cnum; j++) {
+                cin >> content[j];
+            }
+            for (int j = 0; j < cnum; j++) {
+                pair<int, int> pair1 = make_pair(i, content[j]);
+                matrix[n[j] - 1].push_back(pair1);
+            }
+
+        }
+        cout << cloum << " " << row << "\n";
+        for (int i = 0; i < cloum; i++) {
+            long cloumnumber = matrix[i].size();
+            cout << cloumnumber;
+            if (cloumnumber != 0)
+                cout << " ";
+            if (cloumnumber == 0) {
+                cout << "\n" << "\n";
+                continue;
+            }
+            for (int j = 0; j < cloumnumber; j++) {
+                cout << matrix[i][j].first + 1;
+                if (j != cloumnumber - 1) cout << " ";
+            }
+            cout << "\n";
+            for (int j = 0; j < cloumnumber; j++) {
+                cout << matrix[i][j].second;
+                if (j != cloumnumber - 1) cout << " ";
+            }
+            cout << "\n";
+        }
+
+    }
+}
