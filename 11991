@@ -1,0 +1,33 @@
+
+#include <iostream>
+using namespace std;
+
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+
+int main(void) {
+    int eof;
+    while (cin >> eof) {
+        int queries, num;
+        map<long int, vector<long int> > numbers;
+        num = eof;
+        cin  >> queries;
+        for (long int i = 0; i < num; i++) {
+            long int n = 0;
+            cin >> n;
+            numbers[n].push_back(i + 1);
+        }
+        for (long int i = 0; i < queries; i++) {
+            long int chand, number;
+            cin >> chand >> number;
+            if (chand <= numbers[number].size()) {
+                cout<<numbers[number][chand-1]<<endl;
+            }
+            else cout << 0 << endl;
+        }
+    }
+
+}
