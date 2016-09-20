@@ -46,4 +46,50 @@ int main(){
 	}
 }
 
+// another way without vector
+
+//#include <iostream>
+//using namespace std;
+//
+//int main() {
+//    int n;
+//    cin>>n;
+//    for (int i = 0; i < n; ++i) {
+//        int y = 0;
+//        char cards[52][2];
+//        bool check[52] = {false};
+//        for (int j = 51; j >= 0; --j) {
+//            cin>>cards[j][0]>>cards[j][1];
+//        }
+//        int counter = 0;
+//        for (int k = 0; k < 3; ++k) {
+//            int x;
+//            if (cards[25 + counter][0] == 'K' || cards[25 + counter][0] == 'J' ||
+//                cards[25 + counter][0] == 'Q' || cards[25 + counter][0] == 'A' || cards[25 + counter][0] == 'T'){
+//                x = 10;
+//            }
+//            else
+//                x = cards[25 + counter][0] - '0';
+//            check[25 + counter] = true;
+//            for (int j = 1; j <= 10 - x; ++j) {
+//                check[25 + counter + j] = true;
+//            }
+//            counter += 10 - x + 1;
+//            y += x;
+//        }
+//        char newCard[52][2];
+//        int idk = 0;
+//        for (int l = 0; l < 52; ++l) {
+//            if (!check[l]){
+//                newCard[idk][0] = cards[l][0];
+//                newCard[idk][1] = cards[l][1];
+//                idk++;
+//            }
+//        }
+//        cout<<"Case "<<i + 1<<": "<<newCard[idk - y ][0]<<newCard[idk - y ][1]<<endl;
+//
+//    }
+//    return 0;
+//}
+
 //JC 3C 9H KC TH 2D AC 6D 2S TC 2H 6H 8C 5D 3S JH AS JS 4C 9S 9D 6S 8H 2C 8D 8S JD 5H QD 7D KH KD AD KS 3H 5S TD 6C 7C TS 9C 7H 4S QS QC AH 3D 5C 7S 4D QH 4H ---> AD
