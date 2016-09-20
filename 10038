@@ -1,0 +1,44 @@
+
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+#include <math.h>
+
+int main() {
+    int n;
+    while (cin >> n) {
+        vector<int> vector1;
+        set<int> set1;
+        for (int i = 0 ; i < n; i++) {
+            int number;
+            cin >> number;
+            vector1.push_back(number);
+        }
+        int check=0;
+        vector<int>::iterator iterator1 = vector1.begin();
+        vector<int>::iterator iterator2 = (vector1.begin() + 1);
+        for (int i = 0; i < (n-1); ++i, iterator1++, iterator2++) {
+            if (abs((*iterator1) - (*iterator2)) >= n) {
+                cout << "Not jolly" << endl;
+                check=1;
+                break;
+            }
+            else{
+                set1.insert(abs((*iterator1) - (*iterator2)));
+
+            }
+        }
+        if(check==0 && set1.size()==(n-1))
+            cout<<"Jolly"<<endl;
+        else if(check==0){
+            cout<<"Not jolly"<<endl;
+
+        }
+    }
+}
