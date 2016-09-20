@@ -1,0 +1,62 @@
+#include <iostream>
+#include <iomanip>
+using namespace std;
+
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+#include <math.h>
+
+
+
+//int gcd(int a, int b) {
+//    return b == 0 ? a : gcd(b, a % b);
+//}
+//
+//
+//int main(void) {
+//
+//    double numberone;
+//    cin >> numberone;
+//    while (numberone) {
+////        for(double i=1 ;i<numberone;i++) {
+////            double underline = 0;
+////            underline+=i;
+////        }
+//        double underline = (numberone * (numberone - 1)) / 2
+//        ;
+//        // cout << underline << endl;
+//        vector<int> vector1;
+//        for(double i=0;i<numberone;i++){
+//            int num;
+//            cin >> num;
+//            vector1.push_back(num);
+//        }
+//        double soorat = 0;
+//        for(int i=0;i<numberone;i++){
+//            for(int j = i+1 ; j<numberone ; j++){
+//                if(gcd(vector1[i],vector1[j])==1)
+//                    soorat++;
+//
+//            }
+//        }
+//        if (soorat) {
+//
+//            double khar = 6;
+//            double akhar = sqrt((khar * underline) / soorat);
+//            std::cout << std::fixed;
+//            std::cout << std::setprecision(6);
+//            cout << akhar << endl;
+//
+//        }
+//        else {
+//            cout<< "No estimate for this data set."<<endl;
+//        }
+//        cin >> numberone;
+//    }
+//
+//
+//
+//}
