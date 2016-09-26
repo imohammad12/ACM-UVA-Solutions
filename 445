@@ -1,0 +1,41 @@
+int main() {
+    char c;
+    while (scanf("%c", &c)!=EOF) {
+        while (true) {
+
+
+            if (c != '\n') {
+                if (c == '!')
+                    cout << endl;
+                else {
+                    char c2;
+                    //getchar();
+                    scanf("%c", &c2);
+
+
+                    int sum = c - '0';
+                    while (((int) c2) < 58 && 48 < ((int) c2)) {
+                        sum += (c2 - '0');
+                        scanf("%c", &c2);
+                    }
+                    for (int i = 0; i < sum; i++) {
+                        if (c2 == 'b')
+                            cout << " ";
+                        else {
+
+                            cout << c2;
+                        }
+                    }
+                }
+            }
+            else
+                break;
+
+            scanf("%c", &c);
+
+        }
+        cout<<endl;
+
+    }
+
+}
