@@ -1,0 +1,70 @@
+#include <iostream>
+#include <iomanip>
+
+#include <algorithm>
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+#include <math.h>
+
+#include <iostream>
+#include <sstream>
+#include <string>
+
+#include <math.h>
+#include <iostream>
+
+using namespace std;
+
+
+bool func1(pair<int, int> pair1, pair<int, int> pair2) {
+    if (pair1.second < pair2.second)
+        return true;
+    else if (pair1.second == pair2.second) {
+        if (pair1.first > pair2.first)
+            return true;
+    }
+    return false;
+}
+
+int main() {
+    bool idk = false;
+    char c;
+    while (scanf("%c", &c) != EOF) {
+        if (idk)
+            cout << endl;
+        idk = true;
+        vector<pair<int, int> > vector1;
+        set<int> set1;
+        map<int, int> map1;
+        while (c != '\n' && c != '\r') {
+            if (set1.count((int) c) == 0)
+                set1.insert((int) c);
+
+
+            if (map1[(int) c] == NULL)
+                map1[(int) c] = 1;
+            else
+                map1[(int) c] += 1;
+
+            scanf("%c", &c);
+        }
+        set<int>::iterator iterator1 = set1.begin();
+        for (; iterator1 != set1.end(); iterator1++) {
+            vector1.push_back(make_pair((*iterator1), map1[*iterator1]));
+        }
+        sort(vector1.begin(), vector1.end(), func1);
+        vector<pair<int, int>>::iterator it = vector1.begin();
+        for (; it != vector1.end(); ++it) {
+            cout << ((*it).first) << " " << ((*it).second) << endl;
+
+        }
+      
+
+
+    }
+
+
+}
