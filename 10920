@@ -1,0 +1,73 @@
+#include <iostream>
+#include <iomanip>
+
+#include <algorithm>
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+#include <math.h>
+
+#include <iostream>
+#include <sstream>
+#include <string>
+
+#include <math.h>
+#include <iostream>
+
+using namespace std;
+
+
+
+
+int main() {
+    ios::sync_with_stdio(0);
+    int N;
+    cin >> N;
+    while (N) {
+        int row, col;
+        double number, sqr1;
+        int sqr, number1;
+        cin >> number;
+        sqr1 = sqrt(number);
+        sqr = (int) sqr1;
+        if (sqr % 2 == 0)
+            sqr -= 1;
+        map<int, pair<int, int >> map1;
+        int index = sqr * sqr;
+        //   map1[0]= make_pair(0 , 0);
+
+        row = ((N - sqr) / 2) + sqr;
+        col = ((N - sqr) / 2) + sqr;
+        number1 = (int) number;
+        map1[index] = make_pair(row, col);
+        index++;
+
+        map1[index] = make_pair(++row, col);
+
+
+        if (number1 >= index && number1 <= index + sqr) {
+            map1[number1].first = row;
+            map1[number1].second = col - (number1 - index);
+        }
+        else if ((number1 <= index + (2 * sqr) + 1) && number1 > index + sqr) {
+            map1[number1].first = row - (number1 - (index + sqr));
+            map1[number1].second = col - sqr;
+        }
+        else if ((number1 > index + (2 * sqr) + 1) && number1 <= index + (3 * sqr) + 2) {
+            map1[number1].first = row - (sqr + 1);
+            map1[number1].second = (col - sqr) + (number1 - (index + 2 * sqr + 1));
+        }
+        else if (number1 <= index + (4 * sqr) + 3 && (number1 > index + (3 * sqr) + 2)) {
+            map1[number1].first = (row - (sqr + 1)) + (number1 - (index + (3 * sqr) + 2));
+            map1[number1].second = col + 1;
+        }
+
+
+
+        cout << "Line = " << map1[number1].first << ", column = " << map1[number1].second << "." << endl;
+        cin >> N;
+    }
+}
+
