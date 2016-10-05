@@ -1,0 +1,86 @@
+#include <iostream>
+#include <iomanip>
+
+#include <algorithm>
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+#include <math.h>
+
+#include <iostream>
+#include <sstream>
+#include <string>
+
+#include <math.h>
+#include <iostream>
+
+using namespace std;
+//ios::sync_with_stdio(0);
+
+
+bool check(int *arr);
+
+bool check(int *arr) {
+    for (int i = 0; i < 9; ++i) {
+        if (*((arr)+i) != 0)
+            return false;
+    }
+    return true;
+}
+
+int main(void) {
+    //ios::sync_with_stdio(0);
+    int tc;
+    cin >> tc;
+    getchar();
+    int iom = 0;
+    for (int i = 0; i < tc; ++i) {
+        int first[3][3];
+        int second[3][3];
+        getchar();
+        for (int j = 0; j < 3; ++j) {
+            for (int k = 0; k < 3; ++k) {
+                int nn;
+                nn =  getchar();
+                first[j][k] = nn - '0';
+            }
+            getchar();
+        }
+        if (check(&(first[0][0]))) {
+            cout << "-1" << endl;
+            continue;
+        }
+        while (true) {
+            second[0][0] = (first[0][1] + first[1][0]) % 2;
+            second[0][1] = (first[0][0] + first[1][1] + first[0][2]) % 2;
+            second[0][2] = (first[0][1] + first[1][2]) % 2;
+            second[1][0] = (first[0][0] + first[1][1] + first[2][0]) % 2;
+            second[1][1] = (first[0][1] + first[1][0] + first[1][2] + first[2][1]) % 2;
+            second[1][2] = (first[0][2] + first[1][1] + first[2][2]) % 2;
+            second[2][0] = (first[1][0] + first[2][1]) % 2;
+            second[2][1] = (first[2][0] + first[1][1] + first[2][2]) % 2;
+            second[2][2] = (first[2][1] + first[1][2]) % 2;
+            iom++;
+            if (check(&(second[0][0])))
+                break;
+            first[0][0] = (second[0][1] + second[1][0]) % 2;
+            first[0][1] = (second[0][0] + second[1][1] + second[0][2]) % 2;
+            first[0][2] = (second[0][1] + second[1][2]) % 2;
+            first[1][0] = (second[0][0] + second[1][1] + second[2][0]) % 2;
+            first[1][1] = (second[0][1] + second[1][0] + second[1][2] + second[2][1]) % 2;
+            first[1][2] = (second[0][2] + second[1][1] + second[2][2]) % 2;
+            first[2][0] = (second[1][0] + second[2][1]) % 2;
+            first[2][1] = (second[2][0] + second[1][1] + second[2][2]) % 2;
+            first[2][2] = (second[2][1] + second[1][2]) % 2;
+            iom++;
+            if (check(&(first[0][0])))
+                break;
+        }
+        iom--;
+        cout << iom << endl;
+        iom = 0 ;
+    }
+    return 0;
+}
