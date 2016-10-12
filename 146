@@ -1,0 +1,45 @@
+#include <iostream>
+#include <iomanip>
+
+#include <algorithm>
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+#include <math.h>
+
+#include <iostream>
+#include <sstream>
+#include <string>
+
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
+//ios::sync_with_stdio(0);
+
+int main() {
+    char c;
+    c = cin.peek();
+    while (c != '#') {
+        string line;
+        getline(cin, line);
+        string line2 = line;
+        vector<char> vector1(line.size());
+        for (int i = 0; i < line.size(); ++i) {
+            vector1[i] = line[i];
+        }
+        next_permutation(vector1.begin(), vector1.end());
+        for (int j = 0; j < vector1.size(); ++j) {
+            line[j] = vector1[j];
+        }
+        if (line == line2)
+            cout << "No Successor" << endl;
+        else
+            cout << line << endl;
+        c = cin.peek();
+    }
+}
+
