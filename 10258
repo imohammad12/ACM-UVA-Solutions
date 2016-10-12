@@ -1,0 +1,128 @@
+#include <iostream>
+#include <iomanip>
+
+#include <algorithm>
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+#include <math.h>
+
+#include <iostream>
+#include <sstream>
+#include <string>
+
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
+struct contestant{
+    int connumber= 0 , qn = 0  , penalty = 0 ;
+    int ci = 0;
+    int chek[10] = {0};
+    int correct[10] = {0};
+};
+
+bool fun(struct contestant C1 , struct contestant C2){
+    if(C1.ci > C2.ci)
+        return true;
+    else if (C1.ci==C2.ci){
+        if(C1.penalty<C2.penalty)
+            return true;
+        else if(C1.penalty==C2.penalty){
+            if(C1.connumber<C2.connumber)
+                return true;
+            else
+                return false;
+        }
+        else
+            return false;
+    }
+    else
+        return false;
+}
+
+
+
+int main(void) {
+    // int start_s=clock();
+    //ios::sync_with_stdio(0);
+    int tc;
+    cin >> tc;
+    for (int i = 0; i < tc; ++i) {
+        vector<struct contestant> vector1(101);
+        for (int k = 0; k < 101; ++k) {
+            for (int j = 0; j < 10; ++j) {
+                vector1[k].chek[j] = 0;
+                vector1[k].correct[j] = 0;
+            }
+        }
+        int connumber;
+        cin >> connumber;
+        for (; ;) {
+            int qn, penalty;
+            char ci;
+            cin >> qn >> penalty >> ci;
+            if (vector1[connumber].correct[qn] != 1) {
+
+                if (ci == 'C') {
+                    vector1[connumber].qn = qn;
+                    vector1[connumber].ci += 1;
+                    vector1[connumber].connumber = connumber;
+                    vector1[connumber].chek[qn] += penalty;
+                    vector1[connumber].correct[qn] = 1;
+                    vector1[connumber].penalty += vector1[connumber].chek[qn];
+                }
+                if (ci == 'I') {
+                    vector1[connumber].chek[qn] += 20;
+                    vector1[connumber].connumber = connumber;
+                }
+
+                if (ci == 'R' || ci == 'U' || ci == 'E') {
+                    vector1[connumber].connumber = connumber;
+                }
+            }
+            string a;
+
+            getline(cin, a);
+            int c;
+            c = std::cin.peek();
+
+            if (c == '\n') {
+
+
+//                for (int k = 0; k < 101; ++k) {
+//                    for (int j = 0; j < 10; ++j) {
+//                        if(vector1[k].correct[j]==1)
+//                        vector1[k].penalty += vector1[k].chek[j];
+//                    }
+//                }
+                break;
+            }
+            else if (c == -1)
+                break;
+            else {
+                cin >> connumber;
+            }
+//            if(i==tc-1)
+//                break;
+
+        }
+        sort(vector1.begin(), vector1.end(), fun);
+        for (vector<struct contestant>::iterator it1 = vector1.begin(); it1 != vector1.end(); it1++) {
+            if ((*it1).connumber != 0) {
+
+                cout << (*it1).connumber << " " << (*it1).ci << " " << (*it1).penalty << endl;
+            }
+        }
+        if (i != tc - 1)
+            cout << endl;
+
+    }
+    int stop_s = clock();
+    //cout << "time: " << (stop_s-start_s)/double(CLOCKS_PER_SEC)*1000 << endl;
+
+    //return 0;
+}
