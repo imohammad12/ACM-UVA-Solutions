@@ -1,0 +1,37 @@
+#include <iostream>
+#include <iomanip>
+
+#include <algorithm>
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+#include <math.h>
+
+#include <iostream>
+#include <sstream>
+#include <string>
+
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
+//ios::sync_with_stdio(0);
+
+
+int main () {
+    int number;
+    vector<int> vector1;
+    while (cin>>number){
+        vector1.push_back(number);
+        sort(vector1.begin(),vector1.end());
+        if(vector1.size()%2){
+            cout<<vector1[(vector1.size()/2)]<<endl;
+        }
+        else{
+            cout<<(vector1[vector1.size()/2-1]+vector1[vector1.size()/2])/2<<endl;
+        }
+    }
+}
