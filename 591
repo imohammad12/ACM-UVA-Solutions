@@ -1,0 +1,48 @@
+#include <iostream>
+#include <iomanip>
+
+#include <algorithm>
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+#include <math.h>
+
+#include <iostream>
+#include <sstream>
+#include <string>
+
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
+//ios::sync_with_stdio(0);
+
+
+int main () {
+    int walls;
+    cin>> walls;
+    int tc = 0;
+    while (walls != 0){
+        vector<int> numbers;
+        int sum = 0;
+        int moves = 0;
+        for (int i = 0; i < walls; ++i) {
+            int number;
+            cin>> number;
+            numbers.push_back(number);
+            sum+= number;
+        }
+        sum/= walls;
+        for (vector<int>::iterator it1 = numbers.begin();  it1 != numbers.end();  ++it1) {
+            if((*it1)>sum)
+                moves +=(*it1)-sum;
+        }
+        tc++;
+        cin>> walls;
+        cout<<"Set #"<<tc<<endl<<"The minimum number of moves is "<<moves<<"."<<endl<<endl;
+    }
+}
+
