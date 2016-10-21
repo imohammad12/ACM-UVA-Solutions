@@ -1,0 +1,56 @@
+#include <iostream>
+#include <iomanip>
+
+#include <algorithm>
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+#include <math.h>
+
+#include <iostream>
+#include <sstream>
+#include <string>
+
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
+//ios::sync_with_stdio(0);
+
+
+using namespace std;
+
+int main() {
+    int N;
+    while (cin >> N) {
+        vector<int> weights((unsigned long) pow(2, N));
+        vector<int> p((unsigned long) pow(2, N));
+        for (int i = 0; i < pow(2, N); ++i) {
+            int weight;
+            cin >> weight;
+            weights[i] = weight;
+        }
+        for (int j = 0; j < pow(2, N); ++j) {
+            int sum = 0;
+            for (int i = 0; i < N; ++i) {
+                sum += weights[(j ^ (1 << i))];
+            }
+            p[j] = sum;
+        }
+
+        vector<int> main((unsigned long) pow(2, N));
+        for (int l = 0; l < pow(2, N); ++l) {
+            vector<int> v(N);
+            for (int k = 0; k < N; ++k) {
+                v[k] = p[l]+ p[l ^ (1<<k)];
+            }
+            main[l]= *(max_element(v.begin(),v.end()));
+        }
+        cout<<*(max_element(main.begin(),main.end()))<<endl;
+    }
+
+}
+
