@@ -1,0 +1,77 @@
+#include <iostream>
+#include <iomanip>
+
+#include <algorithm>
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cstddef>
+#include <bitset>
+#include <iostream>
+#include <sstream>
+#include <string>
+
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
+//ios::sync_with_stdio(0);
+
+
+
+int main() {
+    int n, m;
+    cin >> n >> m;
+    while (n || m) {
+        bitset<1000000> minutes;
+        bool chek = false;
+        for (int i = 0; i < n; ++i) {
+            int num1, num2;
+            cin >> num1 >> num2;
+            for (int j = num1; chek == false && j < num2; ++j) {
+                if (minutes.test(j)) {
+                    cout << "CONFLICT" << endl;
+                    chek = true;
+                    break;
+                }
+                else {
+                    minutes.set(j);
+                }
+            }
+
+        }
+        for (int k = 0; k < m; ++k) {
+            int num1, num2, interval;
+            cin >> num1 >> num2 >> interval;
+            for (; chek == false && num1 != 1000000 + interval; num1 += interval, num2 += interval) {
+                if (num1 > 1000000 && num2 > 1000000) {
+                    num1 = 1000000 + interval;
+                    break;
+                }
+                if (num2 > 1000000)
+                    num2 = 1000000;
+                for (int i = num1; chek == false && i < num2; ++i) {
+                    if (minutes.test(i)) {
+                        cout << "CONFLICT" << endl;
+                        chek = true;
+                        break;
+                    }
+
+                    else {
+                        minutes.set(i);
+                    }
+                }
+            }
+        }
+
+        if (chek == false)
+            cout << "NO CONFLICT" << endl;
+        cin >> n >> m;
+    }
+}
