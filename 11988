@@ -1,0 +1,69 @@
+#include <iostream>
+#include <iomanip>
+
+#include <algorithm>
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cstddef>
+#include <bitset>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <forward_list>
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cctype>
+using namespace std;
+//ios::sync_with_stdio(0);
+
+
+//#include<stdio.h>
+
+int main() {
+    char c;
+    c = getchar();
+    while (c != EOF) {
+        bool Where_Is_cursor = true;
+        forward_list<char> list;
+        forward_list<char>::iterator cursor = list.before_begin(), end = list.before_begin();
+        int time =0 , estesna = 0;
+        while (c != EOF && c != '\n') {
+            if (c == '[') {
+                if(list.empty())
+                    estesna =1;
+                cursor = list.before_begin();
+                Where_Is_cursor = false;
+            }
+            else if (c == ']') {
+                Where_Is_cursor = true;
+                cursor = end;
+                estesna = 0;
+
+
+            }
+            else {
+                cursor = list.insert_after(cursor, c);
+                if (Where_Is_cursor || estesna == 1) {
+                    end = cursor;
+                }
+            }
+
+            c = cin.get();
+            if (c == EOF || c == '\n') {
+                for (auto &x : list) {
+                    cout << x;
+                }
+            }
+            time++;
+        }
+        puts("");
+        c = cin.get();
+    }
+}
