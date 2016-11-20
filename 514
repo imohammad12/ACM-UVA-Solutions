@@ -1,0 +1,72 @@
+#include <iostream>
+#include <iomanip>
+
+#include <algorithm>
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cstddef>
+#include <bitset>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <forward_list>
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cctype>
+#include <stack>
+using namespace std;
+//ios::sync_with_stdio(0);
+
+
+//#include<stdio.h>
+
+int main() {
+    int numbers ;
+    cin>> numbers;
+    while (numbers){
+        int coaches[1002] , trains[1002];
+        for (int j = 0; j < 1002; ++j) {
+            trains[j]=j+1;
+        }
+        cin>>coaches[0];
+        while (coaches[0]) {
+            stack<int> stack1;
+            for (int i = 1; i < numbers; ++i) {
+                cin >> coaches[i];
+            }
+            stack1.push(trains[0]);
+            int Where_Is_coaches = 0 , Where_Is_trains = 0 , finish =0  ;
+            while (Where_Is_coaches!=numbers){
+                if(stack1.empty())
+                    stack1.push(trains[Where_Is_trains]);
+                if(stack1.top()<coaches[Where_Is_coaches]){
+                    stack1.push(trains[Where_Is_trains]);
+                    Where_Is_trains++;
+                }
+                else if(stack1.top()== coaches[Where_Is_coaches]){
+                    //cout<< stack1.top()<<" ";
+                    stack1.pop();
+                    Where_Is_coaches++;
+                }
+                else if(stack1.top()>coaches[Where_Is_coaches]){
+                    finish = 1 ;
+                    break;
+                }
+            }
+            if(finish)
+                cout<<"No"<<endl;
+            else
+                cout<<"Yes"<<endl;
+            cin>>coaches[0];
+        }
+        cout<<endl;
+        cin>>numbers;
+    }
+}
