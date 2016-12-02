@@ -1,0 +1,76 @@
+#include <iostream>
+#include <iomanip>
+#include <queue>
+#include <algorithm>
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cstddef>
+#include <bitset>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <forward_list>
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cctype>
+#include <stack>
+
+//ios::sync_with_stdio(0);
+using namespace std;
+
+
+
+int main() {
+    int edges , nodes , counter = 1;
+    cin >> nodes;
+    while(nodes) {
+        cin >> edges;
+        bool bicolorable = true;
+        vector<vector<int>> graph(203);
+        int colors[203];
+        for (int j = 0; j < 203; ++j) {
+            colors[j] = 0;
+        }
+        for (int i = 0; i < edges; ++i) {
+            int A1, A2;
+            cin >> A1 >> A2;
+            graph[A2].push_back(A1);
+            graph[A1].push_back(A2);
+        }
+        queue<int> Q;
+        Q.push(0);
+        colors[0] = 2;
+        while (!(Q.empty()) && bicolorable) {
+            int top = Q.front();
+            counter = (colors[top] % 2) + 1;
+            Q.pop();
+            for (int i = 0; i < graph[top].size(); ++i) {
+                if ((colors[(graph[top][i])])) {
+                    if (colors[graph[top][i]] != counter) {
+                        bicolorable = false;
+                        break;
+                    }
+
+                }
+                else {
+                    colors[graph[top][i]] = counter;
+                    Q.push(graph[top][i]);
+                }
+            }
+        }
+        if (bicolorable)
+            cout << "BICOLORABLE." << endl;
+        else
+            cout << "NOT BICOLORABLE." << endl;
+        cin >> nodes ;
+        counter = 1;
+    }
+
+}
