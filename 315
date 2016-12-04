@@ -1,0 +1,105 @@
+#include <iostream>
+#include <iomanip>
+#include <queue>
+#include <algorithm>
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cstddef>
+#include <bitset>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <forward_list>
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cctype>
+#include <stack>
+
+//ios::sync_with_stdio(0);
+using namespace std;
+
+typedef vector<int > vi;
+typedef vector<vector<int>> vvi;
+
+class UnionFind {
+private:
+    vi p, rank;
+public:
+    UnionFind(int N) {
+        rank.assign(N, 0);
+        p.assign(N, 0);
+        for (int i = 0; i < N; i++) p[i] = i;
+    }
+
+    int findSet(int i) { return (p[i] == i) ? i : (p[i] = findSet(p[i])); }
+
+    bool isSameSet(int i, int j) { return findSet(i) == findSet(j); }
+
+    void unionSet(int i, int j) {
+        if (!isSameSet(i, j)) { // if from different set
+            int x = findSet(i), y = findSet(j);
+            if (rank[x] > rank[y]) p[y] = x; // rank keeps the tree short
+            else {
+                p[x] = y;
+                if (rank[x] == rank[y]) rank[y]++;
+            }
+        }
+    }
+};
+
+int main() {
+    int Nodes;
+    cin >> Nodes;
+    while (Nodes) {
+        int DisjoinedSets = 0;
+        int node;
+        vvi alist((Nodes+1));
+
+        cin >> node;
+        while (node) {
+            string line;
+            stringstream ss;
+            getline(cin, line);
+            ss << line;
+            alist[node].push_back(node);
+            int number;
+            while (ss >> number) {
+//                graph.unionSet(node, number);
+                alist[node].push_back(number);
+
+            }
+            cin >> node;
+        }
+        for (int j = 1; j <= Nodes; ++j) {
+            UnionFind graph(Nodes+1);
+            for (int i = 1; i <=Nodes; ++i) {
+                if (i != j) {
+                    for (int k = 0; k < alist[i].size(); ++k) {
+                        if (alist[i][k] != j) {
+                            graph.unionSet(alist[i][k], alist[i][0]);
+                        }
+                    }
+                }
+            }
+            set<int> sets;
+            for (int i = 1; i <= Nodes; ++i) {
+                if (i != j)
+                    sets.insert(graph.findSet(i));
+            }
+            if (sets.size() > 1)
+                DisjoinedSets++;
+        }
+
+        cout << DisjoinedSets << endl;
+        cin >> Nodes;
+
+    }
+
+}
