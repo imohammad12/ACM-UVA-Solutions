@@ -1,0 +1,104 @@
+#include <iostream>
+#include <iomanip>
+#include <queue>
+#include <algorithm>
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cstddef>
+#include <bitset>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <forward_list>
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cctype>
+#include <stack>
+#include <string>
+
+//ios::sync_with_stdio(0);
+using namespace std;
+
+typedef vector<int > vi;
+typedef vector<string > vs;
+typedef vector<vector<int> > vvi;
+typedef vector<vector<string> > vvs;
+typedef pair<int , int> pi;
+
+bool Sort_Func(pi i , pi j){
+    return  ((i.first) < (j.first));
+
+}
+
+int main() {
+    int tc;
+    cin >> tc;
+    while (tc--) {
+        int n, t, m, time = 0;
+        int where = 1;
+        cin >> n >> t >> m;
+        queue<pi> Q[2];
+        vector<pair<int, int >> couts2;
+        for (int i = 0; i < m; ++i) {
+            int resive_time;
+            string R_OR_L;
+            cin >> resive_time >> R_OR_L;
+            if (R_OR_L == "left")
+                Q[1].push(make_pair(i, resive_time));
+            else
+                Q[0].push(make_pair(i, resive_time));
+        }
+        pi when[2];
+        if (!Q[0].empty())
+            when[0] = Q[0].front();
+        else
+            when[0] = make_pair(0,99999999);
+        if (!Q[1].empty())
+            when[1] = Q[1].front();
+        else
+            when[1] = make_pair(0,99999999);
+        int cars = 0;
+        while (!Q[1 - where % 2].empty() || !Q[where].empty()) {
+            while ((when[where].second <= time && cars < n) ||
+                   (!Q[1 - where % 2].empty() && !Q[where].empty() && cars == 0 &&
+                    when[where].second > time && when[where].second <= when[1 - where % 2].second) ||
+                   (!Q[where].empty() && Q[1 - where % 2].empty() &&
+                    when[where].second > time && cars == 0)
+                    ) {
+                if ((cars == 0 && when[where].second > time && when[where].second <= when[1 - where % 2].second
+                     && !Q[1 - where % 2].empty() && !Q[where].empty()) ||
+                    (!Q[where].empty() && Q[1 - where % 2].empty() && cars == 0 && when[where].second > time)
+                        )
+                    time = when[where].second;
+                cars++;
+                couts2.push_back(make_pair(when[where].first, time + t));
+                Q[where].pop();
+                if (!Q[where].empty())
+                    when[where] = Q[where].front();
+                else
+                    when[where].second = 999999999;
+            }
+            if((Q[where].empty() && !Q[1-where%2].empty() && cars==0 && time < when[1-where%2].second)||
+                    (!Q[where].empty() && !Q[1-where%2].empty() && time < when[1-where%2].second && when[where].second > when[1-where%2].second)
+                    && cars==0)
+                time = when[1-where%2].second;
+            time += t;
+            cars = 0;
+            where = 1 - where % 2;
+
+        }
+        sort(couts2.begin(), couts2.end(), Sort_Func);
+        for (vector<pair<int, int>>::iterator iterator1 = couts2.begin(); iterator1 != couts2.end(); ++iterator1) {
+            cout << (*iterator1).second << endl;
+        }
+        if(tc != 0)
+            cout << endl;
+    }
+}
