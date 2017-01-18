@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <iomanip>
 #include <queue>
@@ -32,8 +33,8 @@ typedef vector<vector<int> > vvi;
 typedef vector<vector<string> > vvs;
 typedef pair<int , int> pi;
 
-bool Sort_Func(pi i , pi j){
-    return  ((i.first) < (j.first));
+bool Sort_Func(pi i , pi j) {
+    return ((i.first) < (j.first));
 
 }
 
@@ -59,11 +60,11 @@ int main() {
         if (!Q[0].empty())
             when[0] = Q[0].front();
         else
-            when[0] = make_pair(0,99999999);
+            when[0] = make_pair(0, 99999999);
         if (!Q[1].empty())
             when[1] = Q[1].front();
         else
-            when[1] = make_pair(0,99999999);
+            when[1] = make_pair(0, 99999999);
         int cars = 0;
         while (!Q[1 - where % 2].empty() || !Q[where].empty()) {
             while ((when[where].second <= time && cars < n) ||
@@ -85,10 +86,11 @@ int main() {
                 else
                     when[where].second = 999999999;
             }
-            if((Q[where].empty() && !Q[1-where%2].empty() && cars==0 && time < when[1-where%2].second)||
-                    (!Q[where].empty() && !Q[1-where%2].empty() && time < when[1-where%2].second && when[where].second > when[1-where%2].second)
-                    && cars==0)
-                time = when[1-where%2].second;
+            if ((Q[where].empty() && !Q[1 - where % 2].empty() && cars == 0 && time < when[1 - where % 2].second) ||
+                (!Q[where].empty() && !Q[1 - where % 2].empty() && time < when[1 - where % 2].second &&
+                 when[where].second > when[1 - where % 2].second)
+                && cars == 0)
+                time = when[1 - where % 2].second;
             time += t;
             cars = 0;
             where = 1 - where % 2;
@@ -98,7 +100,7 @@ int main() {
         for (vector<pair<int, int>>::iterator iterator1 = couts2.begin(); iterator1 != couts2.end(); ++iterator1) {
             cout << (*iterator1).second << endl;
         }
-        if(tc != 0)
+        if (tc != 0)
             cout << endl;
     }
 }
