@@ -1,0 +1,62 @@
+#include <iostream>
+#include <iomanip>
+#include <queue>
+#include <algorithm>
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cstddef>
+#include <bitset>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <forward_list>
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cctype>
+#include <stack>
+#include <string>
+
+//ios::sync_with_stdio(0);
+using namespace std;
+
+typedef vector<int > vi;
+typedef vector<string > vs;
+typedef vector<vector<int> > vvi;
+typedef vector<vector<string> > vvs;
+typedef pair<int , int> pi;
+
+
+
+
+
+int main() {
+    int tc ;
+    cin >> tc;
+    getchar();
+    getchar();
+    string line;
+    while (tc--) {
+        map<string , double > map1;
+        double total =0;
+        getline(cin, line);
+        while (line.size()) {
+            map1[line]++;
+            total++;
+            getline(cin, line);
+        }
+        for(map<string , double > :: iterator it1 = map1.begin() ; it1 != map1.end() ; it1++) {
+            cout << (*it1).first << " ";
+            cout << fixed <<std::setprecision(4) << ((double)((*it1).second) / (double)(total)) * (double)100  << endl;
+        }
+        if(tc != 0) cout << endl;
+        map1.clear();
+    }
+
+}
