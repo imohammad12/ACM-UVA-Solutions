@@ -39,7 +39,7 @@ bool Sort_Func(pi i , pi j) {
 }
 
 int main() {
-    int tc;
+   ' int' tc;
     cin >> tc;
     while (tc--) {
         int n, t, m, time = 0;
