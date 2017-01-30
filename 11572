@@ -1,0 +1,63 @@
+#include <iostream>
+#include <iomanip>
+#include <queue>
+#include <algorithm>
+#include <fstream>
+#include <set>
+#include <vector>
+#include <utility>
+#include <map>
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cstddef>
+#include <bitset>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <forward_list>
+#include <math.h>
+#include <iostream>
+#include <string>
+#include <cctype>
+#include <stack>
+#include <string>
+
+//ios::sync_with_stdio(0);
+using namespace std;
+
+typedef vector<int > vi;
+typedef vector<string > vs;
+typedef vector<vector<int> > vvi;
+typedef vector<vector<string> > vvs;
+typedef pair<int , int> pi;
+
+
+
+
+
+int main() {
+    int tc;
+    cin>> tc;
+    while (tc--){
+        int lines , Starting_Point = 0, MUX=0;
+        cin >> lines;
+        map<int , int> lastplace;
+        for (int i = 1; i <= lines; ++i) {
+            int snowflakes ;
+            cin >> snowflakes;
+            if(lastplace[snowflakes]){
+               if(lastplace[snowflakes] > Starting_Point)
+                   Starting_Point = lastplace[snowflakes]  ;
+
+            }
+            if(MUX < i-Starting_Point)
+                MUX = i-Starting_Point;;
+            lastplace[snowflakes] = i;
+        }
+        cout << MUX << endl;
+    }
+}
+
+
+
